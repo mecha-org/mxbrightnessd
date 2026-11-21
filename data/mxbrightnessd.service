@@ -1,0 +1,9 @@
+[Unit]
+Description=Mechanix brightness daemon
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/mxbrightnessd
+Restart=on-failure
+RestartSec=1
+Slice=session.slice

@@ -1,0 +1,4 @@
+# Let the `video` group drive the backlight and tune the ambient light sensor,
+# so mxbrightnessd can run as the session user.
+SUBSYSTEM=="backlight", ACTION=="add", RUN+="/bin/chgrp video /sys%p/brightness", RUN+="/bin/chmod g+w /sys%p/brightness"
+SUBSYSTEM=="iio", ACTION=="add", TEST=="in_illuminance_input", GROUP="video", MODE="0660", RUN+="/bin/sh -c 'cd /sys%p && chgrp video in_illuminance_integration_time events/* 2>/dev/null; chmod g+w in_illuminance_integration_time events/* 2>/dev/null; true'"

@@ -1,0 +1,77 @@
+namespace = "org.mechanix.brightness"
+version = 1
+dir = "mxbrightnessd"
+
+[groups.screen]
+label = "Screen"
+order = 10
+
+[groups.curve]
+label = "Ambient curve"
+order = 20
+
+[groups.device]
+label = "Devices"
+order = 30
+
+[keys.screen.auto]
+type = "bool"
+default = true
+label = "Automatic"
+description = "Follow ambient light when a light sensor exists."
+
+[keys.screen.offset]
+type = "float"
+default = 0.0
+min = -1.0
+max = 1.0
+label = "Offset"
+description = "The user's shift of the ambient curve in automatic mode, in perceived brightness."
+
+[keys.screen.manual]
+type = "float"
+default = 0.5
+min = 0.0
+max = 1.0
+label = "Manual level"
+description = "The perceived brightness in manual mode."
+
+[keys.screen.minimum]
+type = "float"
+default = 0.05
+min = 0.0
+max = 1.0
+label = "Minimum"
+description = "The lowest perceived brightness any setting reaches."
+
+[keys.screen.gamma]
+type = "float"
+default = 2.2
+min = 1.0
+max = 4.0
+label = "Gamma"
+description = "Maps perceived brightness p to the backlight: raw = max * p^gamma."
+
+[keys.curve.lux]
+type = "array"
+element = "float"
+default = [0.05, 0.3, 3.0, 30.0, 300.0]
+label = "Lux points"
+description = "Ambient lux of each curve point, increasing. Pairs with the level at the same index."
+
+[keys.curve.level]
+type = "array"
+element = "float"
+default = [0.10, 0.30, 0.50, 0.75, 1.0]
+label = "Levels"
+description = "Perceived brightness at each lux point, from 0 to 1."
+
+[keys.device.backlight]
+type = "string"
+label = "Backlight"
+description = "Backlight name under /sys/class/backlight. Unset picks one by type."
+
+[keys.device.sensor]
+type = "string"
+label = "Light sensor"
+description = "IIO device name of the light sensor. Unset picks the first with a lux reading."
